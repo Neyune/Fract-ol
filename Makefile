@@ -1,4 +1,4 @@
-NAME = fract-ol
+NAME = fractol
 
 INC_DIR = 	$(shell find includes -type d)
 
@@ -14,7 +14,7 @@ OBJ_DIR	= obj
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 ##List every .c found inside SRC_DIR
-SRC = fract-ol.c
+SRC = fract-ol.c basics.c
 
 ##Transform and place every .o from SRC
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 				@echo "Compiling $(NAME) ...\c"
-				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm -lbsd -lXext -lX11 -o fract-ol
+				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm -lbsd -lXext -lX11 -o fractol
 				@echo " DONE"
 
 $(OBJ_DIR)/%.o : %.c

@@ -1,6 +1,8 @@
 
-
+#include <unistd.h>
 #include "fract-ol.h"
+#include <stdio.h>
+
 
 typedef struct	s_data {
 	void	*img;
@@ -31,6 +33,29 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
 	my_mlx_pixel_put(&img, 1869, 5, 0x00FF0000);
+	my_mlx_pixel_put(&img, 1869, 9, 0x00FF0000);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
+
+/*
+int	main(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		write(1 , "\tYou must passed in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n" , 57);
+		return (0);
+	}
+	if (ft_strcmp(argv[1], "julia\0") == 0)
+	{
+		printf("%s" ,argv[1]);
+	}
+	else if (ft_strcmp(argv[1] ,"mandelbrot\0") == 0)
+	{
+		printf("%s" ,argv[1]);
+	}
+	else 
+		write(1 , "\tYou must passed in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n" , 57);
+	return (0);
+}
+*/
