@@ -14,14 +14,14 @@ OBJ_DIR	= obj
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 ##List every .c found inside SRC_DIR
-SRC = fract-ol.c basics.c
+SRC = fract-ol.c basics.c Events.c
 
 ##Transform and place every .o from SRC
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 ##Basics flags
-CFLAGS =	-Wall -Wextra -Werror
-
+CFLAGS =	-Wall -Wextra 
+# -Werror
 
 ##Create the flags to includes every .h needed by this program
 IFLAGS =	$(foreach dir, $(INC_DIR), -I $(dir))

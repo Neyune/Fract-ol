@@ -1,61 +1,126 @@
 
-#include <unistd.h>
 #include "fract-ol.h"
-#include <stdio.h>
 
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*mlx_win;
+// 	void 	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// 	int		i;
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+// 	i = 0;
+// 	mlx = mlx_init();
+// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+// 	img = mlx_new_image(mlx, 1920, 1080);
+// 	// addr = mlx_get_data_addr(img, &bits_per_pixel, &line_length,
+// 	// 							&endian);
+// 	while (i < 700)
+// 	{
+// 		mlx_pixel_put(mlx, mlx_win, i, i, 0x00FF0000);
+// 		i++;
+// 	}
+// 	mlx_loop(mlx);
+// }
 
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int		mandelbrot(int x, int y) 
 {
-	char	*dst;
+		int i;
+		int it;
+		double init;
+		double result;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+		i = -1;
+		it = 0;
+		init = x + y ;
+		result = init;
+		while (it < NB_IT)
+		{
+			result = result * result + init; 
+			it++;
+		}
+		return(result);
 }
 
-int	main(void)
+int		pixel_color(int x, int y)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+		int color;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	my_mlx_pixel_put(&img, 1869, 5, 0x00FF0000);
-	my_mlx_pixel_put(&img, 1869, 9, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+		printf("%d", mandelbrot(x,y));
+		color = mandelbrot(x, y);
+		return (color);
 }
 
-/*
+void	img_pixel_put(char *addr, int x, int y, int color)
+{
+	char	*pixel;
+
+	pixel = addr + (y * SIZE_X) + x;
+	(*(int *)pixel) = color;
+}
+
+void	pixel_gen(t_data *mlx)
+{
+	 	int x; 
+	 	int y;
+	
+		y = 0;
+		while (y <= SIZE_Y)
+		{
+			x = 0;
+			while (x < SIZE_X)
+			{
+				img_pixel_put(mlx->addr, x, y, pixel_color(x,y));
+				x++;
+			}
+			y += 2;
+		}
+}
+
+void	create_window(char *str)
+{
+	t_data	mlx;
+
+	mlx =(t_data){};
+	mlx.mlx = mlx_init();
+	mlx.mlx_win = mlx_new_window(mlx.mlx, SIZE_X, SIZE_Y, str);
+	mlx.mlx_img = mlx_new_image(mlx.mlx, SIZE_X, SIZE_Y);
+	mlx.addr = mlx_get_data_addr(mlx.mlx_img, &mlx.bits_per_pixel, &mlx.line_length,
+								&mlx.endian);
+	pixel_gen(&mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.mlx_img, 0, 0);
+	mlx_hook(mlx.mlx_win, 17, 0, error_exit , &mlx);
+	mlx_key_hook(mlx.mlx_win, deal_key, &mlx);
+	mlx_mouse_hook(mlx.mlx_win, deal_mouse, (void*)0);
+	mlx_loop(mlx.mlx);
+}
+
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-	{
+	int x;
+	int y;
+
+	if (argc < 2)
 		write(1 , "\tYou must passed in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n" , 57);
-		return (0);
-	}
-	if (ft_strcmp(argv[1], "julia\0") == 0)
+	else if (ft_strcmp(argv[1], "julia\0") == 0)
 	{
-		printf("%s" ,argv[1]);
+		if (argc == 4)
+		{
+			x = ft_atoi(argv[2]);
+			y = ft_atoi(argv[3]);
+		}
+		else
+			create_window(argv[1]);
 	}
 	else if (ft_strcmp(argv[1] ,"mandelbrot\0") == 0)
 	{
-		printf("%s" ,argv[1]);
+		create_window(argv[1]);
 	}
 	else 
 		write(1 , "\tYou must passed in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n" , 57);
 	return (0);
 }
-*/
+
