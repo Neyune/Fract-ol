@@ -9,7 +9,9 @@
 
 # define SIZE_X 640
 # define SIZE_Y 480
-# define NB_IT 15
+# define NB_IT 50
+// # define MIDDLE_X SIZE_X/2
+// # define MIDDLE_Y SIZE_Y/2
 
 typedef struct      s_data
 {
@@ -24,8 +26,8 @@ typedef struct      s_data
 
 int	ft_strcmp(const char *s1, const char *s2);
 int	ft_atoi(char *str);
-int error_exit(int button, int x, int y, t_data *mlx);
-int deal_mouse(int button, int x, int y, void *params);
+void error_exit(t_data *mlx);
+int deal_mouse(int button, int x, int y);
 int	deal_key(int key, t_data *mlx);
 
 #endif

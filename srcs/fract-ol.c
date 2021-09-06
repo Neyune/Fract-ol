@@ -26,30 +26,46 @@
 // 	mlx_loop(mlx);
 // }
 
-int		mandelbrot(int x, int y) 
+unsigned int		mandelbrot(int x, int y) 
 {
 		int i;
 		int it;
-		double init;
+		double c_x;
+		double c_y;
+		double z_x;
+		double z_y;
+		double tmp;
 		double result;
+		unsigned int color;
 
-		i = -1;
+		// i =  SIZE_X/3;
 		it = 0;
-		init = x + y ;
-		result = init;
-		while (it < NB_IT)
+		c_x = (double)x / (SIZE_X/3) -2;
+		// printf("valeur de x: %d\n", x);
+		c_y = (double)y / (SIZE_Y/3) - 1.6;
+		z_x = 0;
+		z_y = 0;
+		result = 0;
+			printf("valeur de : c %lf\n", c_x);
+
+		while (it < NB_IT && result < 2)
 		{
-			result = result * result + init; 
 			it++;
+			tmp = z_x;
+			z_x = z_x * z_x - z_y * z_y + c_x;
+			z_y = 2 * z_y * tmp + c_y;
+			result = sqrt(z_x * z_x + z_y * z_y);
 		}
-		return(result);
+		if (result >= 2)
+			color = 0;
+		color = it * it * it + 88888888888;
+		return(color);
 }
 
-int		pixel_color(int x, int y)
+unsigned int		pixel_color(int x, int y)
 {
 		int color;
 
-		printf("%d", mandelbrot(x,y));
 		color = mandelbrot(x, y);
 		return (color);
 }
@@ -59,7 +75,7 @@ void	img_pixel_put(char *addr, int x, int y, int color)
 	char	*pixel;
 
 	pixel = addr + (y * SIZE_X) + x;
-	(*(int *)pixel) = color;
+	(*(unsigned int *)pixel) = 77777;
 }
 
 void	pixel_gen(t_data *mlx)
@@ -68,15 +84,16 @@ void	pixel_gen(t_data *mlx)
 	 	int y;
 	
 		y = 0;
-		while (y <= SIZE_Y)
+		while (y < SIZE_Y)
 		{
 			x = 0;
 			while (x < SIZE_X)
 			{
-				img_pixel_put(mlx->addr, x, y, pixel_color(x,y));
+				// img_pixel_put(mlx->addr , x , y , 11111);
+				mlx_pixel_put(mlx->mlx, mlx->mlx_win, x, y, pixel_color(x,y));
 				x++;
 			}
-			y += 2;
+			y++;
 		}
 }
 
@@ -91,10 +108,10 @@ void	create_window(char *str)
 	mlx.addr = mlx_get_data_addr(mlx.mlx_img, &mlx.bits_per_pixel, &mlx.line_length,
 								&mlx.endian);
 	pixel_gen(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.mlx_img, 0, 0);
-	mlx_hook(mlx.mlx_win, 17, 0, error_exit , &mlx);
+	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.mlx_img, 0, 0);
 	mlx_key_hook(mlx.mlx_win, deal_key, &mlx);
 	mlx_mouse_hook(mlx.mlx_win, deal_mouse, (void*)0);
+	mlx_hook(mlx.mlx_win, 17, 0, error_exit , &mlx);
 	mlx_loop(mlx.mlx);
 }
 
