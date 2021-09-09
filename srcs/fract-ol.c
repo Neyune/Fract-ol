@@ -46,8 +46,6 @@ unsigned int		mandelbrot(int x, int y)
 		z_x = 0;
 		z_y = 0;
 		result = 0;
-			printf("valeur de : c %lf\n", c_x);
-
 		while (it < NB_IT && result < 2)
 		{
 			it++;
@@ -70,12 +68,12 @@ unsigned int		pixel_color(int x, int y)
 		return (color);
 }
 
-void	img_pixel_put(char *addr, int x, int y, int color)
+void	img_pixel_put(char *addr, int x, int y)
 {
 	char	*pixel;
 
-	pixel = addr + (y * SIZE_X) + x;
-	(*(unsigned int *)pixel) = 77777;
+	pixel = addr + ((y * SIZE_X) + x)*4;
+	(*(unsigned int *)pixel) = mandelbrot(x, y);
 }
 
 void	pixel_gen(t_data *mlx)
@@ -89,8 +87,8 @@ void	pixel_gen(t_data *mlx)
 			x = 0;
 			while (x < SIZE_X)
 			{
-				// img_pixel_put(mlx->addr , x , y , 11111);
-				mlx_pixel_put(mlx->mlx, mlx->mlx_win, x, y, pixel_color(x,y));
+				img_pixel_put(mlx->addr , x , y);
+				// mlx_pixel_put(mlx->mlx, mlx->mlx_win, x, y, pixel_color(x,y));
 				x++;
 			}
 			y++;
@@ -108,7 +106,7 @@ void	create_window(char *str)
 	mlx.addr = mlx_get_data_addr(mlx.mlx_img, &mlx.bits_per_pixel, &mlx.line_length,
 								&mlx.endian);
 	pixel_gen(&mlx);
-	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.mlx_img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.mlx_img, 0, 0);
 	mlx_key_hook(mlx.mlx_win, deal_key, &mlx);
 	mlx_mouse_hook(mlx.mlx_win, deal_mouse, (void*)0);
 	mlx_hook(mlx.mlx_win, 17, 0, error_exit , &mlx);

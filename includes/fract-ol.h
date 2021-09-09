@@ -8,8 +8,8 @@
 #include <unistd.h>
 
 # define SIZE_X 640
-# define SIZE_Y 480
-# define NB_IT 50
+# define SIZE_Y 640
+# define NB_IT 150
 // # define MIDDLE_X SIZE_X/2
 // # define MIDDLE_Y SIZE_Y/2
 
@@ -23,6 +23,12 @@ typedef struct      s_data
 	int		line_length;
 	int		endian;
 }                   t_data;
+
+typedef struct		s_img
+{
+	int sx;
+	int sy;
+}					t_img;
 
 int	ft_strcmp(const char *s1, const char *s2);
 int	ft_atoi(char *str);
