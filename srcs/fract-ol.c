@@ -1,48 +1,6 @@
 
 #include "fract-ol.h"
 
-// unsigned int		pixel_color(int x, int y)
-// {
-// 		int color;
-
-// 		color = mandelbrot(x, y);
-// 		return (color);
-// }
-
-// typedef struct      s_data
-// {
-//     void    *mlx;
-//     void    *mlx_win;
-//     void    *mlx_img;
-// 	char	*addr;
-// 	char	*addr2;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-
-// }                   t_data;
-
-// typedef struct		s_rgb
-// {
-// 	unsigned int r;
-// 	unsigned int g;
-// 	unsigned int b;
-// }					t_rgb;
-
-// typedef struct		s_fractal
-// {
-// 		t_data	mlx;
-// 		double	zoom;
-// 		double	offset;
-// 		double	z_x;
-// 		double	z_y;
-// 		double	c_x;
-// 		double	c_y;
-// 		int		f;
-// 		t_rgb	color;
-
-// }					t_fractal;
-
 void	img_pixel_put(char *addr, int x, int y, unsigned int color)
 {
 	char	*pixel;

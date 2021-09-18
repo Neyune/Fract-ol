@@ -33,12 +33,12 @@ typedef struct      s_data
 
 }                   t_data;
 
-typedef struct		s_rgb
-{
-	unsigned int r;
-	unsigned int g;
-	unsigned int b;
-}					t_rgb;
+// typedef struct		s_rgb
+// {
+// 	unsigned int r;
+// 	unsigned int g;
+// 	unsigned int b;
+// }					t_rgb;
 
 typedef struct		s_fractal
 {
@@ -50,8 +50,6 @@ typedef struct		s_fractal
 		double	c_x;
 		double	c_y;
 		int		f;
-		t_rgb	color;
-
 }					t_fractal;
 
 

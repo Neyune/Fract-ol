@@ -20,9 +20,8 @@ SRC = fract-ol.c basics.c Events.c Draw.c
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 ##Basics flags
-CFLAGS =	-Wall -Wextra 
+CFLAGS =	-Wall -Wextra -Werror
 # -g3 -fsanitize=address
-# -Werror
 
 ##Create the flags to includes every .h needed by this program
 IFLAGS =	$(foreach dir, $(INC_DIR), -I $(dir))

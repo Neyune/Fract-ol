@@ -1,17 +1,6 @@
 
 #include "fract-ol.h"
 
-// void	init_fractal(t_fractal *values)
-// {
-// 		values->zoom = 0;
-// 		values->len_x = 0;
-// 		values->len_y = 0;
-// 		values->c_x = 0;
-// 		values->c_y = 0;
-// 		values->z_x = 0;
-// 		values->z_y = 0;
-// }
-
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned int	i;
