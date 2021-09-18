@@ -21,6 +21,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 ##Basics flags
 CFLAGS =	-Wall -Wextra 
+# -g3 -fsanitize=address
 # -Werror
 
 ##Create the flags to includes every .h needed by this program
@@ -33,7 +34,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 				@echo "Compiling $(NAME) ...\c"
-				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm -lbsd -lXext -lX11 -o fractol
+				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm -lbsd -lXext -lX11 -o fractol  $(CFLAGS)
 				@echo " DONE"
 
 $(OBJ_DIR)/%.o : %.c
