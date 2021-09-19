@@ -6,7 +6,7 @@
 /*   By: ereali <ereali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 02:02:03 by ereali            #+#    #+#             */
-/*   Updated: 2021/09/19 02:02:10 by ereali           ###   ########.fr       */
+/*   Updated: 2021/09/19 03:14:03 by ereali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ typedef struct s_fractal
 	int		f;
 }					t_fractal;
 
-unsigned int	mandelbrot(int x, int y, t_fractal values);
-unsigned int	julia(int x, int y, t_fractal values);
+unsigned int	mandelbrot(int x, int y, t_fractal *values);
+unsigned int	julia(int x, int y, t_fractal *values);
 int				ft_strisdigit(char *c);
 int				ft_strcmp(const char *s1, const char *s2);
 double			ft_atof(char *str);
-void			pixel_gen(t_data *mlx, int f, t_fractal values);
+void			pixel_gen(t_data *mlx, int f, t_fractal *values);
 int				error_exit(t_data *mlx);
 int				deal_mouse(int button, int x, int y, t_fractal *values);
 int				deal_key(int key, t_data *mlx);

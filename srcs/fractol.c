@@ -6,7 +6,7 @@
 /*   By: ereali <ereali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 02:30:29 by ereali            #+#    #+#             */
-/*   Updated: 2021/09/19 02:30:37 by ereali           ###   ########.fr       */
+/*   Updated: 2021/09/19 03:16:37 by ereali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	img_pixel_put(char *addr, int x, int y, unsigned int color)
 	(*(unsigned int *)pixel) = color;
 }
 
-void	pixel_gen(t_data *mlx, int f, t_fractal values)
+void	pixel_gen(t_data *mlx, int f, t_fractal *values)
 {
 	int	x;
 	int	y;
@@ -42,21 +42,21 @@ void	pixel_gen(t_data *mlx, int f, t_fractal values)
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->mlx_img, 0, 0);
 }
 
-void	create_window(int f, t_fractal values)
+void	create_window(int f, t_fractal *values)
 {
 	t_data	mlx;
 
 	mlx = (t_data){};
-	values.f = f;
+	values->f = f;
 	mlx.mlx = mlx_init();
 	mlx.mlx_win = mlx_new_window(mlx.mlx, SIZE_X, SIZE_Y, "Fractol\0");
 	mlx.mlx_img = mlx_new_image(mlx.mlx, SIZE_X, SIZE_Y);
 	mlx.addr = mlx_get_data_addr(mlx.mlx_img, &mlx.bits_per_pixel,
 			&mlx.line_length, &mlx.endian);
-	values.mlx = mlx;
+	values->mlx = mlx;
 	pixel_gen(&mlx, f, values);
 	mlx_key_hook(mlx.mlx_win, deal_key, &mlx);
-	mlx_mouse_hook(mlx.mlx_win, deal_mouse, &values);
+	mlx_mouse_hook(mlx.mlx_win, deal_mouse, values);
 	mlx_hook(mlx.mlx_win, 17, 0, error_exit, &mlx);
 	mlx_loop(mlx.mlx);
 }
@@ -81,10 +81,10 @@ int	main(int argc, char **argv)
 			values.c_x = -0.4;
 			values.c_y = 0.6;
 		}
-		create_window(1, values);
+		create_window(1, &values);
 	}
 	else if (argc >= 2 && ft_strcmp(argv[1], "mandelbrot\0") == 0)
-		create_window(0, values);
+		create_window(0, &values);
 	else
 		write(1, "\tYou must use in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n", 54);
 	return (0);
