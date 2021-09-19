@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	if ((argc >= 4 && (!ft_strisdigit(argv[2])))
 		|| (argc >= 4 && !(ft_strisdigit(argv[3]))))
 		argc = 2;
-	else if (argc > 2 && ft_strcmp(argv[1], "julia\0") == 0)
+	else if (argc >= 2 && ft_strcmp(argv[1], "julia\0") == 0)
 	{
 		if (argc == 4)
 		{
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 		}
 		create_window(1, values);
 	}
-	else if (argc > 2 && ft_strcmp(argv[1], "mandelbrot\0") == 0)
+	else if (argc >= 2 && ft_strcmp(argv[1], "mandelbrot\0") == 0)
 		create_window(0, values);
 	else
 		write(1, "\tYou must use in parameter :\n·\t\tjulia\n·\t\tmandelbrot\n", 54);
