@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   basics.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ereali <ereali@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/19 02:13:58 by ereali            #+#    #+#             */
+/*   Updated: 2021/09/19 02:14:09 by ereali           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -36,10 +47,10 @@ int	ft_strisdigit(char *c)
 	return (1);
 }
 
-static double dec_part(double nb, char *str, int i)
+static double	dec_part(double nb, char *str, int i)
 {
 	int	j;
-	
+
 	j = i;
 	while (str[i] >= '0' && str[i] <= '9')
 	{

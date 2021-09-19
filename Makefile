@@ -14,7 +14,7 @@ OBJ_DIR	= obj
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 ##List every .c found inside SRC_DIR
-SRC = fract-ol.c basics.c Events.c Draw.c
+SRC = fractol.c basics.c Events.c Draw.c
 
 ##Transform and place every .o from SRC
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
