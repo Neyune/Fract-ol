@@ -32,8 +32,9 @@ CC =	gcc
 all: $(NAME)
 
 $(NAME): $(OBJ)
+				make -C minilibx-linux 2>/dev/null
 				@echo "Compiling $(NAME) ...\c"
-				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm -lbsd -lXext -lX11 -o fractol  $(CFLAGS)
+				$(CC) $(OBJ) $(CFLAGS) $(IFLAGS) -I $(INC_LIBX) -L $(INC_LIBX) -lmlx -lm  -L /opt/X11/lib -lXext -lX11 -o fractol  $(CFLAGS)
 				@echo " DONE"
 
 $(OBJ_DIR)/%.o : %.c
